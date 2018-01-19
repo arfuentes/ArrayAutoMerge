@@ -1,7 +1,7 @@
-# ArrayAutoMerge
+# ArrayAutoMerge (or Array_Auto_Merge)
 A PHP class to transform SQL query results from several nested tables to nested arrays.
 
-Using a delimiter character (usually the underscore character producing snake_case) in the names of the returning fields in a SQL query, it transforms the PHP array obtained from the records dataset in a complex nested array by __auto merging the sections of the array with equal values__. The array is sectioned based on the array keys that share the same prefixed before each delimiter character, recursively.
+Using a delimiter character (usually the underscore character producing snake_case) in the names of the returning fields in a SQL query, it transforms the PHP array obtained from the records dataset in a complex nested array by __auto merging the sections of the array with equal values__. The array is sectioned based on the array keys that share the same prefix before each delimiter character, recursively.
 
 #### Dependencies
 * `PHP >= 5.4`
