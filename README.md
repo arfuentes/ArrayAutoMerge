@@ -1,6 +1,8 @@
 # ArrayAutoMerge
 A PHP class to transform SQL query results from several nested tables to nested arrays.
 
+Using a delimiter character (usually the underscore character producing snake_case) in the names of the returning fields in a SQL query, it transforms the PHP array obtained from the records dataset in a complex nested array by __auto merging the sections of the array with equal values__. The array is sectioned based on the array keys that share the same prefixed before each delimiter character, recursively.
+
 #### Dependencies
 * `PHP >= 5.4`
 
@@ -16,7 +18,7 @@ __ArrayAutoMerge__ is a small class that solves this problem. Its instantiation 
 ## Usage
 In my particular case I used this class in a _codeigniter_ project, calling `auto_merge` passing the output of the method `result_array()`, which returns the query result as a pure array; but it’s quite normal in PHP to execute queries against a database and return the dataset as an array of records, where every record is an array with the field names as the keys.
 
-Let’s consider the following PostgreSQL query based on the [chinook database](https://github.com/lerocha/chinook-database), which take all the customers, invoices and invoice lines for all the invoices created in 2013 with billing country equal to United Kingdom:
+Let’s consider the following PostgreSQL query based on the [chinook database](https://github.com/lerocha/chinook-database), which takes all the customers, invoices and invoice lines for all the invoices created in 2013 with billing country equal to United Kingdom:
 ```sql
 SELECT c."CustomerId"    AS "Id",
        c."FirstName",
