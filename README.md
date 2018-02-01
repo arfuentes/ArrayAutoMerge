@@ -16,7 +16,7 @@ As a novice PHP developer, I needed to emulate this library for a project I was 
 __ArrayAutoMerge__ is a small class that solves this problem. Its instantiation requires to define the name of the primary key to be used in every section that will be transformed in a nested array (usually `id` or `Id`), and the delimiter character that defines the sections (usually underscore `_`). It has only one public method `auto_merge`, where the input is the array you want to transform, and the output is the transformed array.
 
 ## Usage
-In my particular case I used this class in a _codeigniter_ project, calling `auto_merge` passing the output of the method `result_array()`, which returns the query result as a pure array; but it’s quite normal in PHP to execute queries against a database and return the dataset as an array of records, where every record is an array with the field names as the keys.
+In my particular case I used this class in a _codeigniter_ project, passing to the method `auto_merge`, the output of the method `result_array()`, which returns the query result as a pure array; but it’s quite normal in PHP to execute queries against a database and return the dataset as an array of records, where every record is an array with the field names as the keys.
 
 Let’s consider the following PostgreSQL query based on the [chinook database](https://github.com/lerocha/chinook-database), which takes all the customers, invoices and invoice lines for all the invoices created in 2013 with billing country equal to United Kingdom:
 ```sql
@@ -173,7 +173,7 @@ Notice that __ArrayAutoMerge__ can be used for `LEFT JOIN` relationships, when a
 
 For simplification purposes, the class doesn’t support:
 -	Composite primary keys. As an alternative solution, if any of the tables used in the query has a composite primary key, you can generate a single field with the name of the key settled in __ArrayAutoMerge__ constructor by, for example, concatenating all the primary key values of the table. 
--	A primary key name different from the settled one to deduplicate. As an alternative solution you can duplicate the key field, using one with the name you really want in the output and the other one with the settled name for duplication purposes.
+-	A primary key name different from the settled one to deduplicate. As an alternative solution you can duplicate the key field, using one with the name you really want in the output and the other one with the settled name for deduplication purposes.
 
 As the class is intended to work only with arrays, every section is transformed in an array of arrays, even when the array contains only one element; so, if you decide that some fields to be grouped in a section, being aware that it’s not really a collection, but a single element (usually in many-to-one relationships), the transformation will generate an array, and you should take the first element of the array. For example, if you are listing invoices, and for each invoice you want to show the information of the customer using the section `_Customer`, __ArrayAutoMerge__ will generate an array of customers, even when you know there’s only one per invoice, but, as you have a good understanding of your model and build the SQL query using a known logic, you can simply take the first element of the array.
 
